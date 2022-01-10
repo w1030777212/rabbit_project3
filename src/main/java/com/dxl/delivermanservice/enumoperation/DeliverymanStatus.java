@@ -1,6 +1,6 @@
 package com.dxl.delivermanservice.enumoperation;
 
 public enum DeliverymanStatus {
-    AVALIABIE,
+    AVALIABLE,
     NOT_AVALIABLE;
 }

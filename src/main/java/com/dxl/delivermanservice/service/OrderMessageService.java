@@ -35,6 +35,10 @@ public class OrderMessageService {
               false,
               null
             );
+            channel.queueBind("queue.deliveryman",
+                    "exchange.order.deliveryman",
+                    "key.deliveryman");
+
             channel.basicConsume(
                     "queue.deliveryman",
                     true,
@@ -54,7 +58,7 @@ public class OrderMessageService {
         final byte[] body = message.getBody();
         final ObjectMapper objectMapper = new ObjectMapper();
         final OrderMessageDTO orderMessageDTO = objectMapper.readValue(body, OrderMessageDTO.class);
-        List<DeliverymanPO> delieryList = deliverymanMapper.selectAvaliableDeliveryman(DeliverymanStatus.AVALIABIE);
+        List<DeliverymanPO> delieryList = deliverymanMapper.selectAvaliableDeliveryman(DeliverymanStatus.AVALIABLE);
         if(delieryList != null && delieryList.size()>0){
             orderMessageDTO.setDeliverymanId(delieryList.get(0).getId());
         }
